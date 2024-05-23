@@ -1,4 +1,4 @@
-name: Release Playnite Web Game DB Updater
+name: Release Playnite Web
 
 on:
   workflow_dispatch:
@@ -25,15 +25,15 @@ jobs:
     - 
       name: Install dependencies
       run: yarn install
-      working-directory: .modules/playnite-web/apps/game-db-updater
+      working-directory: .modules/playnite-web/apps/playnite-web
     - 
       name: Build project
       run: yarn nx build game-db-updater
-      working-directory: .modules/playnite-web/apps/game-db-updater
+      working-directory: .modules/playnite-web/apps/playnite-web
     - 
       name: Package project
       run: yarn nx package game-db-updater
-      working-directory: .modules/playnite-web/apps/game-db-updater
+      working-directory: .modules/playnite-web/apps/playnite-web
     - 
       name: Set up QEMU
       uses: docker/setup-qemu-action@v3
@@ -59,11 +59,11 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: .modules/playnite-web/apps/game-db-updater
-        file: .modules/playnite-web/apps/game-db-updater/Dockerfile
+        context: .modules/playnite-web/apps/playnite-web
+        file: .modules/playnite-web/apps/playnite-web/Dockerfile
         platforms: linux/arm64
         push: true
-        tags: ghcr.io/cvele/playnite-web-game-db-updater:3.0.1, ghcr.io/cvele/playnite-web-game-db-updater:latest
+        tags: ghcr.io/cvele/playnite-web:3.0.1, ghcr.io/cvele/playnite-web:latest
         labels: |
           io.hass.version=3.0.1
           io.hass.type=addon
