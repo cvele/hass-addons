@@ -1,0 +1,78 @@
+{
+  "name": "Playnite Web",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "7.0.403"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20.9.0"
+    },
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "customizations": {
+    "devpod": {
+      "prebuildRepository": "ghcr.io/andrew-codes/playnite-web"
+    },
+    "vscode": {
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          }
+        },
+        "workbench.colorTheme": "Dracula Pro"
+      },
+      "extensions": [
+        "andrew-codes.jest-snippets",
+        "arcanis.vscode-zipfs",
+        "bierner.github-markdown-preview",
+        "bierner.markdown-yaml-preamble",
+        "capaj.vscode-exports-autocomplete",
+        "cmstead.js-codeformer",
+        "cmstead.jsrefactor",
+        "dbaeumer.vscode-eslint",
+        "dracula-theme-pro.theme-dracula-pro",
+        "drKnoxy.eslint-disable-snippets",
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot-chat",
+        "GitHub.copilot",
+        "github.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
+        "humao.rest-client",
+        "johnuphoff.vscode-styled-sort",
+        "kisstkondoros.vscode-codemetrics",
+        "mikestead.dotenv",
+        "ms-vscode.powershell",
+        "Orta.vscode-jest",
+        "paulmolluzzo.convert-css-in-js",
+        "pflannery.vscode-versionlens",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        "rpdswtk.vsmqtt",
+        "sburg.vscode-javascript-booster",
+        "streetsidesoftware.code-spell-checker",
+        "unifiedjs.vscode-mdx"
+      ]
+    }
+  },
+  "remoteUser": "root",
+  "postCreateCommand": "bash -i -c './.devcontainer/post-create.sh'",
+  "appPort": [
+    "1883:1883",
+    "3000:3000",
+    "3001:3001"
+  ],
+  "containerEnv": {
+    "DISPLAY": "localhost:10.0"
+  },
+  "remoteEnv": {
+    "DISPLAY": "localhost:10.0"
+  }
+}

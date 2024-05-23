@@ -1,0 +1,38 @@
+{
+  "name": "playnite-web-plugin",
+  "sourceRoot": "apps/PlayniteWebPlugin/src",
+  "projectType": "application",
+  "targets": {
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn rimraf .dist _packaged .test-runs",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/.dist"],
+      "options": {
+        "command": "msbuild PlayniteWeb.csproj -property:Configuration=Release",
+        "cwd": "{projectRoot}/src"
+      }
+    },
+    "build/restore": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nuget restore",
+        "cwd": "{projectRoot}/src"
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash -c './scripts/package.sh'",
+        "cwd": "{projectRoot}"
+      }
+    }
+  },
+  "tags": ["windows"],
+  "implicitDependencies": []
+}

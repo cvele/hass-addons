@@ -1,0 +1,13 @@
+{
+  "name": "playnite-web-plugin",
+  "description": "Playnite extension required for Playnite Web.",
+  "version": "3.1.0",
+  "private": true,
+  "devDependencies": {
+    "cpy": "^11.0.0",
+    "cpy-cli": "^5.0.0",
+    "nx": "^17.1.2",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5"
+  }
+}

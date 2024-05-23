@@ -1,0 +1,3 @@
+[submodule "playnite-web-game-db-updater/playnite-web"]
+	path = playnite-web-game-db-updater/playnite-web
+	url = git@github.com:andrew-codes/playnite-web.git

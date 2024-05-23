@@ -1,0 +1,27 @@
+{
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["clean", "^build", "build/restore"],
+      "cache": true
+    },
+    "package": {
+      "dependsOn": ["clean", "build"],
+      "cache": false
+    },
+    "publish": {
+      "dependsOn": ["package"],
+      "cache": false
+    },
+    "test/unit": {
+      "dependsOn": ["test/unit/restore", "test/unit/build"],
+      "cache": true
+    },
+    "test/unit/restore": {
+      "dependsOn": ["build/restore"],
+      "cache": false
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  }
+}

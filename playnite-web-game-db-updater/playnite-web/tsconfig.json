@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "plugins": [
+      {
+        "name": "typescript-remix-routes-plugin",
+        "tag": "route",
+      }
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types",
+      "apps/playnite-web/node_modules"
+    ],
+  },
+}

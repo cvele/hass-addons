@@ -1,0 +1,61 @@
+{
+  "name": "playnite-web-app",
+  "sourceRoot": "apps/playnite-web-app/src",
+  "projectType": "application",
+  "targets": {
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn rimraf .dist _packaged .test-runs build public/build",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "yarn remix-routes -w",
+          "yarn cross-env DEBUG='playnite-web-app/*' yarn remix dev -c \"node server.mjs\"",
+          "yarn remix-pwa dev"
+        ]
+      }
+    },
+    "test/components": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn cypress open",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "yarn remix-routes && yarn remix build && yarn remix-pwa build"
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "bash -c 'mkdir -p _packaged/build && cp build/ _packaged -r && cp public/ _packaged -r && cp server.mjs _packaged && cp package.json _packaged'"
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker build --tag $REGISTRY/$OWNER/$REPO_NAME-app:$TAG --file Dockerfile ../.. && docker push $REGISTRY/$OWNER/$REPO_NAME-app:$TAG"
+        ],
+        "cwd": "{projectRoot}"
+      }
+    }
+  },
+  "tags": ["linux"],
+  "implicitDependencies": []
+}
