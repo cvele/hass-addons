@@ -30,7 +30,7 @@
         "DB_PASSWORD": "str?",
         "DEBUG": "str"
     },
-    "image": "ghcr.io/cvele/playnite-web-game-db-updater",
+    "image": "ghcr.io/cvele/playnite-web-game-db-updater:latest",
     "map": [
         "config:rw"
     ],
