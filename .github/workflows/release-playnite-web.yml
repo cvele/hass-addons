@@ -25,15 +25,15 @@ jobs:
     - 
       name: Install dependencies
       run: yarn install
-      working-directory: .modules/playnite-web/apps/playnite-web
+      working-directory: .modules/playnite-web/apps/playnite-web-app
     - 
       name: Build project
-      run: yarn nx build game-db-updater
-      working-directory: .modules/playnite-web/apps/playnite-web
+      run: yarn nx build playnite-web-app
+      working-directory: .modules/playnite-web/apps/playnite-web-app
     - 
       name: Package project
-      run: yarn nx package game-db-updater
-      working-directory: .modules/playnite-web/apps/playnite-web
+      run: yarn nx package playnite-web-app
+      working-directory: .modules/playnite-web/apps/playnite-web-app
     - 
       name: Set up QEMU
       uses: docker/setup-qemu-action@v3
