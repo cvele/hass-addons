@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'mongo4/**'
+      - 'mongo4/*'
+      - '.github/workflows/release-mongo4.yml'
   workflow_dispatch: 
 
 jobs:

@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '.modules/playnite-web/**'
-      - 'playnite-web-game-db-updater/**'
+      - '.modules/playnite-web/*'
+      - 'playnite-web-game-db-updater/*'
       - '.github/workflows/release-playnite-web-game-db-updater.yml'
   workflow_dispatch: 
 
