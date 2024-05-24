@@ -1,4 +1,5 @@
-# Playnite Web Game DB Updater
+# Playnite Web App
+
 
 > ### Custom Built Images
 >
@@ -7,17 +8,17 @@
 > ### Future Plans for Official Add-ons
 >
 > The official Playnite Web repository by Andrew Codes has plans to release these add-ons, as noted in [Issue #319](https://github.com/andrew-codes/playnite-web/issues/319). These custom-built add-ons are provided in the meantime to simplify the setup process explained in the blog post: [Control Playnite from Home Assistant Dashboard](https://blog.cvetic.in.rs/home-automation/control-playnite-home-assistant-dashboard/).
-> 
+
 ## Description
 
-This Home Assistant add-on allows you to update the Playnite web game database using MQTT and MongoDB. The add-on listens to MQTT messages and updates the MongoDB database accordingly.
+This Home Assistant add-on provides a web interface and API for Playnite. It allows you to manage and interact with your Playnite game library through a web browser. The add-on is configurable via Home Assistant options and supports multiple architectures.
 
 ## Features
 
-- Connects to an MQTT broker to receive updates.
-- Updates a MongoDB database with the received data.
+- Provides a web interface for managing the Playnite game library.
+- Offers an API for integrating with other applications.
 - Configurable via Home Assistant add-on options.
-- Supports multiple architectures: `aarch64`, `amd64` and `armv7`
+- Supports multiple architectures: `aarch64`, `amd64`, and `armv7`.
 
 ## Installation
 
@@ -28,11 +29,11 @@ This Home Assistant add-on allows you to update the Playnite web game database u
    - Add the repository URL: `https://github.com/cvele/hass-repository`.
 
 2. **Install the Add-on**:
-   - Find the "Playnite Web Game DB Updater" add-on in the list.
+   - Find the "Playnite Web App" add-on in the list.
    - Click on it and then click **Install**.
 
 3. **Configure the Add-on**:
-   - Go to the Playnite Web Game DB Updater add-on details page.
+   - Go to the Playnite Web App add-on details page.
    - Click on **Configuration** and set the options as needed.
 
 4. **Start the Add-on**:
@@ -42,27 +43,35 @@ This Home Assistant add-on allows you to update the Playnite web game database u
 
 You can configure the add-on via the Home Assistant UI. Here are the available configuration options:
 
-- **MQTT_HOST**: IP address or hostname of the MQTT broker.
-- **MQTT_PORT**: Port of the MQTT broker (default: 1883).
-- **MQTT_USERNAME**: Username to access the MQTT broker (optional).
-- **MQTT_PASSWORD**: Password to access the MQTT broker (optional).
+- **PORT**: Port on which the web application is accessible (default: 3000).
 - **DB_HOST**: IP address or hostname of the MongoDB database.
 - **DB_PORT**: Port of the MongoDB database (default: 27017).
 - **DB_USERNAME**: Username to access the MongoDB database (optional).
 - **DB_PASSWORD**: Password to access the MongoDB database (optional).
-- **DEBUG**: Debug level for troubleshooting (default: "game-db-updater/*").
+- **DEBUG**: Debug level for troubleshooting (default: "playnite-web/*").
+- **USERNAME**: Username used to login to the web interface.
+- **PASSWORD**: Password used to login to the web interface.
+- **SECRET**: Secret used to protect credentials.
+- **MQTT_HOST**: IP address or hostname of the MQTT broker.
+- **MQTT_PORT**: Port of the MQTT broker (default: 1883).
+- **MQTT_USERNAME**: Username to access the MQTT broker (optional).
+- **MQTT_PASSWORD**: Password to access the MQTT broker (optional).
 
 ### Example Configuration
 
 ```json
 {
-  "MQTT_HOST": "mqtt.example.com",
-  "MQTT_PORT": 1883,
-  "MQTT_USERNAME": "user",
-  "MQTT_PASSWORD": "password",
+  "PORT": 3000,
   "DB_HOST": "mongodb.example.com",
   "DB_PORT": 27017,
   "DB_USERNAME": "dbuser",
   "DB_PASSWORD": "dbpassword",
-  "DEBUG": "game-db-updater/*"
+  "DEBUG": "playnite-web/*",
+  "USERNAME": "admin",
+  "PASSWORD": "password",
+  "SECRET": "supersecret",
+  "MQTT_HOST": "mqtt.example.com",
+  "MQTT_PORT": 1883,
+  "MQTT_USERNAME": "mqttuser",
+  "MQTT_PASSWORD": "mqttpassword"
 }

@@ -4,7 +4,9 @@
     "slug": "playnite-web-game-db-updater",
     "description": "An add-on to update Playnite web game database using MQTT and MongoDB.",
     "arch": [
-        "aarch64"
+        "aarch64",
+        "amd64",
+        "armv7"
     ],
     "startup": "services",
     "boot": "auto",

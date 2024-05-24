@@ -4,7 +4,9 @@
     "slug": "playnite-web-app",
     "description": "An add-on to provide web interface and API for Playnite.",
     "arch": [
-        "aarch64"
+        "aarch64",
+        "amd64",
+        "armv7"
     ],
     "startup": "services",
     "boot": "auto",

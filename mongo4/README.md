@@ -1,5 +1,7 @@
 # MongoDB Home Assistant Addon
 
+> Please note that MongoDB version 4.4.18 is the last version with support for the Raspberry Pi 4 architecture.
+
 ## Description
 
 This is a Home Assistant addon for running MongoDB. MongoDB is a NoSQL database known for its high performance, high availability, and easy scalability. This addon allows you to run a MongoDB instance within your Home Assistant setup.
