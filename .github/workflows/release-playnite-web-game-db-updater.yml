@@ -63,26 +63,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - 
-      name: Build and load temporary image for amd64
-      uses: docker/build-push-action@v5
-      with:
-        context: .modules/playnite-web/apps/game-db-updater
-        file: .modules/playnite-web/apps/game-db-updater/Dockerfile
-        platforms: linux/amd64
-        tags: temp-playnite-web-game-db-updater:amd64
-        load: true
-
-    - 
-      name: Build and load temporary image for arm64
-      uses: docker/build-push-action@v5
-      with:
-        context: .modules/playnite-web/apps/game-db-updater
-        file: .modules/playnite-web/apps/game-db-updater/Dockerfile
-        platforms: linux/arm64
-        tags: temp-playnite-web-game-db-updater:arm64
-        load: true
-
-    - 
       name: Build and push final image for multiple platforms
       uses: docker/build-push-action@v5
       with:
