@@ -1,4 +1,4 @@
-name: Update Submodules
+name: Nightly Submodules Update
 
 on:
   schedule:
