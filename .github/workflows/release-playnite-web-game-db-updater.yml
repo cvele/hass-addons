@@ -8,6 +8,8 @@ on:
       - '.modules/playnite-web/**'
       - 'playnite-web-game-db-updater/config.json'
       - '.github/workflows/release-playnite-web-game-db-updater.yml'
+      - 'playnite-web-game-db-updater/build.json'
+      - 'playnite-web-game-db-updater/run.sh'
   workflow_dispatch: 
 
 jobs:
