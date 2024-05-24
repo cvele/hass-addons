@@ -59,7 +59,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: .modules/playnite-web/apps/playnite-web
+        context: .modules/playnite-web
         file: .modules/playnite-web/apps/playnite-web/Dockerfile
         platforms: linux/arm64
         push: true
