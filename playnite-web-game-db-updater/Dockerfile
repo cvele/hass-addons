@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source https://github.com/andrew-codes/playnite-w
 WORKDIR /opt/playnite-web-game-db-updater
 COPY ../.modules/playnite-web/apps/game-db-updater/_packaged/ .
 
-COPY run.sh /
+COPY ./run.sh /
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
