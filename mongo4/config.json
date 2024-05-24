@@ -27,6 +27,6 @@
     "username": "str",
     "password": "str"
   },
-  "image": "mongo:4.4.18",
+  "image": "mongo",
   "icon": "icon.png"
 }
