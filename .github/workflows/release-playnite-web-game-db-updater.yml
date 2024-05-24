@@ -6,9 +6,8 @@ on:
       - main
     paths:
       - '.modules/playnite-web/**'
-      - 'playnite-web-game-db-updater/config.json'
+      - 'playnite-web-game-db-updater/**'
       - '.github/workflows/release-playnite-web-game-db-updater.yml'
-      - 'playnite-web-game-db-updater/build.json'
   workflow_dispatch: 
 
 jobs:
