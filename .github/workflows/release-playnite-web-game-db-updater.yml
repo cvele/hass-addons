@@ -6,8 +6,9 @@ on:
       - main
     paths:
       - '.modules/playnite-web/**'
+      - 'playnite-web-game-db-updater/config.json'
       - '.github/workflows/release-playnite-web-game-db-updater.yml'
-      - 'playnite-web-game-db-updater/**'
+      - 'playnite-web-game-db-updater/build.json'
   workflow_dispatch: 
 
 jobs:
@@ -63,13 +64,13 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - 
-      name: Build and push final image for multiple platforms
+      name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: .
-        file: playnite-web-game-db-updater/Dockerfile
-        platforms: linux/amd64,linux/arm64,linux/arm/v7
+        context: .modules/playnite-web/apps/game-db-updater
+        file: .modules/playnite-web/apps/game-db-updater/Dockerfile
         push: true
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
         tags: |
           ghcr.io/cvele/playnite-web-game-db-updater:3-dev
           ghcr.io/cvele/playnite-web-game-db-updater:latest
