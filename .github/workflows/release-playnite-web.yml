@@ -7,6 +7,7 @@ on:
     paths:
       - '.modules/playnite-web/**'
       - 'playnite-web-app/config.json'
+      - '.github/workflows/release-playnite-web.yml'
   workflow_dispatch: 
 
 jobs:
