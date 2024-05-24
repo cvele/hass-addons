@@ -1,7 +1,13 @@
 name: Release Playnite Web Game DB Updater
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.modules/playnite-web/**'
+      - 'playnite-web-game-db-updater/config.json'
+  workflow_dispatch: 
 
 jobs:
   build-and-push:

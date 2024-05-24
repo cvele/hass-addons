@@ -1,7 +1,13 @@
 name: Release Playnite Web
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.modules/playnite-web/**'
+      - 'playnite-web-app/config.json'
+  workflow_dispatch: 
 
 jobs:
   build-and-push:

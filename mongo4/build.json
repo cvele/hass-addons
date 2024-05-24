@@ -1,8 +1,0 @@
-{
-    "build_from": {
-        "linux/arm64": "mongo:4.4.18"
-    },
-    "codenotary": {
-        "signer": "vladimir@cvetic.in.rs"
-    }
-}
