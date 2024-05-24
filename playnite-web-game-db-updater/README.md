@@ -17,7 +17,7 @@ This Home Assistant add-on allows you to update the Playnite web game database u
 - Connects to an MQTT broker to receive updates.
 - Updates a MongoDB database with the received data.
 - Configurable via Home Assistant add-on options.
-- Supports multiple architectures: `aarch64`, `amd64` and `armv7`
+- Supports multiple architectures: `aarch64`, `amd64`
 
 ## Installation
 

@@ -69,7 +69,7 @@ jobs:
         context: .modules/playnite-web
         file: .modules/playnite-web/apps/playnite-web/Dockerfile
         push: true
-        platforms: linux/amd64,linux/arm64,linux/arm/v7
+        platforms: linux/amd64,linux/arm64
         tags: |
           ghcr.io/cvele/playnite-web:3-dev
           ghcr.io/cvele/playnite-web:latest
@@ -78,4 +78,3 @@ jobs:
           io.hass.type=addon
           io.hass.arch=aarch64
           io.hass.arch=amd64
-          io.hass.arch=armv7
