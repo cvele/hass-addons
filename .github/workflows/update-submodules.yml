@@ -10,12 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - 
+        name: Checkout Repository
         uses: actions/checkout@v3
         with:
           submodules: recursive
-
-      - name: Update Submodules
+      - 
+        name: Set up Git user
+        run: |
+            git config --global user.name "GitHub Action"
+            git config --global user.email "action@github.com"
+      - 
+        name: Update Submodules
         run: |
           git submodule update --remote --merge
           git add .
