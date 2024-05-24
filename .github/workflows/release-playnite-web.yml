@@ -69,8 +69,8 @@ jobs:
         file: .modules/playnite-web/apps/playnite-web/Dockerfile
         platforms: linux/arm64
         push: true
-        tags: ghcr.io/cvele/playnite-web:3.0.1, ghcr.io/cvele/playnite-web:latest
+        tags: ghcr.io/cvele/playnite-web:3-dev, ghcr.io/cvele/playnite-web:latest
         labels: |
-          io.hass.version=3.0.1
+          io.hass.version=3-dev
           io.hass.type=addon
           io.hass.arch=aarch64
