@@ -18,7 +18,7 @@ This Home Assistant add-on provides a web interface and API for Playnite. It all
 - Provides a web interface for managing the Playnite game library.
 - Offers an API for integrating with other applications.
 - Configurable via Home Assistant add-on options.
-- Supports multiple architectures: `aarch64`, `amd64`, and `armv7`.
+- Supports multiple architectures: `aarch64`, `amd64`
 
 ## Installation
 
