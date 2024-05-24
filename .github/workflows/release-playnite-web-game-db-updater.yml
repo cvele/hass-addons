@@ -63,24 +63,33 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - 
-      name: Build original
+      name: Build and load temporary image for amd64
       uses: docker/build-push-action@v5
       with:
         context: .modules/playnite-web/apps/game-db-updater
         file: .modules/playnite-web/apps/game-db-updater/Dockerfile
-        push: false
+        platforms: linux/amd64
+        tags: temp-playnite-web-game-db-updater:amd64
         load: true
-        platforms: linux/amd64,linux/arm64
-        tags: |
-          temp-playnite-web-game-db-updater
+
     - 
-      name: Build and push
+      name: Build and load temporary image for arm64
+      uses: docker/build-push-action@v5
+      with:
+        context: .modules/playnite-web/apps/game-db-updater
+        file: .modules/playnite-web/apps/game-db-updater/Dockerfile
+        platforms: linux/arm64
+        tags: temp-playnite-web-game-db-updater:arm64
+        load: true
+
+    - 
+      name: Build and push final image for multiple platforms
       uses: docker/build-push-action@v5
       with:
         context: playnite-web-game-db-updater/
         file: playnite-web-game-db-updater/Dockerfile
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
-        platforms: linux/amd64,linux/arm64
         tags: |
           ghcr.io/cvele/playnite-web-game-db-updater:3-dev
           ghcr.io/cvele/playnite-web-game-db-updater:latest
@@ -89,3 +98,4 @@ jobs:
           io.hass.type=addon
           io.hass.arch=aarch64
           io.hass.arch=amd64
+          io.hass.arch=armv7
