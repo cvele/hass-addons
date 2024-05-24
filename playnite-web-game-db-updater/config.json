@@ -1,6 +1,6 @@
 {
     "name": "Playnite Web Game DB Updater",
-    "version": "3.0.1",
+    "version": "3-dev",
     "slug": "playnite-web-game-db-updater",
     "description": "An add-on to update Playnite web game database using MQTT and MongoDB.",
     "arch": [

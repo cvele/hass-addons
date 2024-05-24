@@ -1,6 +1,6 @@
 {
     "name": "Playnite Web App",
-    "version": "3.0.1",
+    "version": "3-dev",
     "slug": "playnite-web-app",
     "description": "An add-on to provide web interface and API for Playnite.",
     "arch": [
