@@ -27,6 +27,6 @@
     "username": "str",
     "password": "str"
   },
-  "image": "mongo",
+  "image": "ghcr.io/cvele/hass-mongo4",
   "icon": "icon.png"
 }
