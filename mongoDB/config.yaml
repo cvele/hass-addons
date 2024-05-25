@@ -8,8 +8,7 @@ arch:
 startup: "services"
 boot: "auto"
 ports:
-  - container: 27017
-    host: 27017
+  27017/tcp: 27017
 options:
   MONGO_INITDB_ROOT_USERNAME: "admin"
   MONGO_INITDB_ROOT_PASSWORD: "changeme"
@@ -17,23 +16,26 @@ options:
   MONGO_BIND_IP: "0.0.0.0"
 schema:
   MONGO_INITDB_ROOT_USERNAME:
-    type: "str"
+    type: str
     required: true
     description: "Root username for MongoDB"
   MONGO_INITDB_ROOT_PASSWORD:
-    type: "str"
+    type: str
     required: true
     description: "Root password for MongoDB"
   MONGO_PORT:
-    type: "int"
+    type: int
     required: false
     default: 27017
     description: "Port for MongoDB to bind to"
   MONGO_BIND_IP:
-    type: "str"
+    type: str
     required: false
     default: "0.0.0.0"
     description: "IP address for MongoDB to bind to"
-image: "ghcr.io/cvele/hass-mongodb"
+image: "ghcr.io/cvele/hass-mongoDB"
 map:
-  - /mnt/data/mongo:/data/db:rw
+  config:
+    - source: /mnt/data/mongo
+      target: /data/db
+      type: rw
