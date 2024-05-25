@@ -1,14 +1,79 @@
 #include <tunables/global>
 
-/usr/bin/mongod {
-  # Include all basic rules and system profiles
+profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
-  #include <abstractions/nameservice>
-  #include <abstractions/user-tmp>
-  #include <abstractions/ssl_certs>
 
-  # Allow MongoDB to read and write its data
+  capability,
+  file,
+  signal,
+  mount,
+  umount,
+  remount,
+  network udp,
+  network tcp,
+  network dgram,
+  network stream,
+  network inet,
+  network inet6,
+  network netlink raw,
+  network unix dgram,
+
+  capability setgid,
+  capability setuid,
+  capability sys_admin,
+  capability dac_read_search,
+  # capability dac_override,
+  # capability sys_rawio,
+
+  # S6-Overlay
+  /init ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /run/{,**} rwk,
+  /dev/tty rw,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/lib/bashio/** ix,
+  /etc/s6/** rix,
+  /run/s6/** rix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /init rix,
+  /var/run/** mrwkl,
+  /var/run/ mrwkl,
+  /dev/i2c-1 mrwkl,
+  # Files required
+  /dev/fuse mrwkl,
+  /dev/sda1 mrwkl,
+  /dev/sdb1 mrwkl,
+  /dev/nvme0 mrwkl,
+  /dev/nvme1 mrwkl,
+  /dev/mmcblk0p1 mrwkl,
+  /dev/* mrwkl,
+  /tmp/** mrkwl,
+
+  # Data access
+  /data/** rw,
+
+  # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
+  ptrace (trace,read) peer=docker-default,
+
+  # docker daemon confinement requires explicit allow rule for signal
+  signal (receive) set=(kill,term) peer=/usr/bin/docker,
+
+  # MongoDB specific rules
+  /usr/bin/mongod mr,
+  /usr/bin/mongo mr,
+  /usr/bin/mongos mr,
   /mnt/data/mongo/** rwk,
+
+  # Allow necessary network operations
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
 
   # Deny access to specific system files and directories for security
   deny /sys/[^f]*/** rwklx,
@@ -17,17 +82,6 @@
   deny /root/** r,
   deny /etc/shadow r,
   deny /etc/shadow- r,
-
-  # Allow necessary network operations
-  network inet stream,
-  network inet dgram,
-  network inet6 stream,
-  network inet6 dgram,
-
-  # Allow MongoDB to execute and interact with itself
-  /usr/bin/mongod mr,
-  /usr/bin/mongo mr,
-  /usr/bin/mongos mr,
 
   # Miscellaneous necessary permissions
   capability dac_override,
