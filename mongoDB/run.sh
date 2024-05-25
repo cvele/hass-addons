@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-BASHIO_VERSION="0.14.3"
-mkdir -p /tmp/bashio
-curl -sSL "https://github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio
-mv /tmp/bashio/lib /usr/lib/bashio
-ln -s /usr/lib/bashio/bashio /usr/bin/bashio
-rm -rf /tmp/bashio
-
 MONGO_INITDB_ROOT_USERNAME=$(bashio::config 'MONGO_INITDB_ROOT_USERNAME')
 MONGO_INITDB_ROOT_PASSWORD=$(bashio::config 'MONGO_INITDB_ROOT_PASSWORD')
 MONGO_PORT=$(bashio::config 'MONGO_PORT')
