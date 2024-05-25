@@ -45,4 +45,4 @@ jobs:
           context: mongoDB
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/cvele/hass-addons/mongoDB:4.4.18, ghcr.io/cvele/hass-addons/mongoDB:latest
+          tags: ghcr.io/cvele/hass-mongodb:4.4.18,ghcr.io/cvele/hass-mongodb:latest

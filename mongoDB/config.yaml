@@ -34,6 +34,6 @@ schema:
     required: false
     default: "0.0.0.0"
     description: "IP address for MongoDB to bind to"
-image: "ghcr.io/cvele/hass-mongoDB"
+image: "ghcr.io/cvele/hass-mongodb"
 map:
   - /mnt/data/mongo:/data/db:rw
