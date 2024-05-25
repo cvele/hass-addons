@@ -8,3 +8,5 @@ if [ -z "$MONGO_INITDB_ROOT_USERNAME" ] || [ -z "$MONGO_INITDB_ROOT_PASSWORD" ];
   echo "MongoDB root username or password is not set. Exiting."
   exit 1
 fi
+
+mongod --version
