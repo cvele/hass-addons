@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+source /usr/lib/bashio/bashio.sh
 MONGO_INITDB_ROOT_USERNAME=$(bashio::config 'MONGO_INITDB_ROOT_USERNAME')
 MONGO_INITDB_ROOT_PASSWORD=$(bashio::config 'MONGO_INITDB_ROOT_PASSWORD')
 MONGO_PORT=$(bashio::config 'MONGO_PORT')
