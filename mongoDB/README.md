@@ -1,6 +1,6 @@
 # MongoDB Home Assistant Addon
 
-> Please note that MongoDB version 4.4.16 is the last version with support for the Raspberry Pi 4 architecture.
+> Please note that MongoDB version 4.4.16 is the last version with support for the Raspberry Pi 4 architecture. [More info](https://github.com/docker-library/mongo/issues/485)
 
 ## Description
 
