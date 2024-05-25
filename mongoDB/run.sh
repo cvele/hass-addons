@@ -9,4 +9,4 @@ if [ -z "$MONGO_INITDB_ROOT_USERNAME" ] || [ -z "$MONGO_INITDB_ROOT_PASSWORD" ];
   exit 1
 fi
 
-mongod --version
+mongod --bind_ip_all --port 27017 --auth
