@@ -2,10 +2,12 @@
 
 profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
+  #include <abstractions/nameservice>
+  #include <abstractions/user-tmp>
+  #include <abstractions/ssl_certs>
 
   capability,
-  file,
-  signal,
+  network,
   mount,
   network inet stream,
   network inet dgram,
@@ -15,15 +17,21 @@ profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   capability setgid,
   capability setuid,
   capability dac_read_search,
-  capability dac_override,  # Necessary for MongoDB to override DAC permissions.
+  capability dac_override,
   capability net_bind_service,
   capability sys_chroot,
   capability sys_resource,
+  capability sys_nice,
 
   # MongoDB-specific permissions
   /usr/bin/mongod mr,
   /usr/bin/mongo mr,
   /usr/bin/mongos mr,
+  /usr/bin/mongotop mr,
+  /usr/bin/mongorestore mr,
+  /usr/bin/mongoimport mr,
+  /usr/bin/mongofiles mr,
+  /usr/bin/mongodump mr,
   /mnt/data/mongo/** rwk,
   /var/log/mongodb/** rw,
 
@@ -33,6 +41,36 @@ profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   network inet6 stream,
   network inet6 dgram,
 
+  # Allow system resource access
+  /sys/devices/system/cpu/ r,
+  /sys/devices/system/node/ r,
+  /sys/devices/system/node/** r,
+  /proc/*/status r,
+
+  # Allow config access
+  /etc/mongod.conf r,
+
+  # Allow pid, socket, socket lock file access
+  /var/run/mongod.pid rw,
+
+  # Allow systemd notify messages
+  /{,var/}run/systemd/notify w,
+
+  # Allow data files dir access
+  /var/lib/mongodb/ r,
+  /var/lib/mongodb/** rwk,
+
+  # Allow log file access
+  /var/log/mongodb/ r,
+  /var/log/mongodb/** rw,
+
+  # Allow access to openssl config
+  /etc/mongo-cluster.key r,
+
+  # Allow MongoDB to use shared memory
+  /dev/shm/** rwk,
+  /tmp/** rwk,
+
   # Deny access to specific system files and directories for security
   deny /sys/[^f]*/** rwklx,
   deny /proc/** rwklx,
@@ -41,9 +79,6 @@ profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   deny /etc/shadow r,
   deny /etc/shadow- r,
 
-  # Allow MongoDB to use shared memory
-  /dev/shm/** rwk,
-  
   # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
   ptrace (trace,read) peer=docker-default,
 
@@ -56,7 +91,6 @@ profile mongo_addon flags=(attach_disconnected,mediate_deleted) {
   deny capability sys_ptrace,
   deny capability sys_admin,
   deny capability sys_boot,
-  deny capability sys_nice,
   deny capability sys_pacct,
   deny capability sys_tty_config,
   deny capability mknod,
