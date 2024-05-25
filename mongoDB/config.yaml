@@ -23,11 +23,9 @@ ports:
 options:
   MONGO_INITDB_ROOT_USERNAME: null
   MONGO_INITDB_ROOT_PASSWORD: null
-  MONGO_PORT: 27017
 schema:
   MONGO_INITDB_ROOT_USERNAME: str
   MONGO_INITDB_ROOT_PASSWORD: password
-  MONGO_PORT: "int(1,65535)?"
 image: "ghcr.io/cvele/hass-mongodb"
 map:
   config:

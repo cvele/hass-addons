@@ -22,7 +22,6 @@ RUN mv /tmp/bashio/lib /usr/lib/bashio
 RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
 RUN rm -rf /tmp/bashio
 
-
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
