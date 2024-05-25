@@ -1,12 +1,12 @@
-name: Release Mongo4
+name: Release MongoDB
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'mongo4/*'
-      - '.github/workflows/release-mongo4.yml'
+      - 'mongoDB/*'
+      - '.github/workflows/release-mongoDB.yml'
   workflow_dispatch: 
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v5
       with:
-          context: mongo4
+          context: mongoDB
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/cvele/hass-mongo4:4.4.18,ghcr.io/cvele/hass-mongo4:latest
+          tags: ghcr.io/cvele/hass-mongoDB:4.4.18, ghcr.io/cvele/hass-mongoDB:latest

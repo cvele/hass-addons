@@ -1,0 +1,28 @@
+version: "2"
+
+profile: "hassio-supervisor"
+path: "/usr/bin/mongod"
+
+apparmor: "profile:/usr/share/hassio/apparmor/hassio-supervisor"
+
+cap_add:
+  - NET_ADMIN
+  - SYS_ADMIN
+
+security_opt:
+  - no-new-privileges:true
+
+capabilities:
+  - network
+  - mount
+  - cgroup
+  - dbus
+  - dbus_send
+  - signal
+
+deny:
+  - @{PROC}/* w
+  - @{PROC}/sys/kernel/random/boot_id w
+  - @{PROC}/sys/vm/overcommit_memory w
+  - @{PROC}/sysrq-trigger rw
+  - @{PROC}/sys/{rq,mw,nr,app,proc}* rw

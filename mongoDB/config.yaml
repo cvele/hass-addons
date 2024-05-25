@@ -1,0 +1,39 @@
+name: "MongoDB"
+version: "4.4.18"
+slug: "mongo"
+description: "A MongoDB addon for Home Assistant"
+arch:
+  - amd64
+  - aarch64
+startup: "services"
+boot: "auto"
+ports:
+  - container: 27017
+    host: 27017
+options:
+  MONGO_INITDB_ROOT_USERNAME: "admin"
+  MONGO_INITDB_ROOT_PASSWORD: "changeme"
+  MONGO_PORT: 27017
+  MONGO_BIND_IP: "0.0.0.0"
+schema:
+  MONGO_INITDB_ROOT_USERNAME:
+    type: "str"
+    required: true
+    description: "Root username for MongoDB"
+  MONGO_INITDB_ROOT_PASSWORD:
+    type: "str"
+    required: true
+    description: "Root password for MongoDB"
+  MONGO_PORT:
+    type: "int"
+    required: false
+    default: 27017
+    description: "Port for MongoDB to bind to"
+  MONGO_BIND_IP:
+    type: "str"
+    required: false
+    default: "0.0.0.0"
+    description: "IP address for MongoDB to bind to"
+image: "ghcr.io/cvele/hass-mongoDB"
+map:
+  - /mnt/data/mongo:/data/db:rw
