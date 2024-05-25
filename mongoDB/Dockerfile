@@ -16,9 +16,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN BASHIO_VERSION="0.14.3"
 RUN mkdir -p /tmp/bashio
-RUN curl -f -L -s -S "https://github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio
+RUN curl -f -L -s -S "https://github.com/hassio-addons/bashio/archive/v0.14.3.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio
 RUN mv /tmp/bashio/lib /usr/lib/bashio
 RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
 RUN rm -rf /tmp/bashio
