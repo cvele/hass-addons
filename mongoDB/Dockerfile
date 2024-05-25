@@ -1,11 +1,11 @@
-FROM mongo:4.4.18
+FROM mongo:4.4.16
 
 LABEL org.opencontainers.image.source https://github.com/cvele/hass-addons
 LABEL io.hass.name="MongoDB"
 LABEL io.hass.description="A MongoDB addon for Home Assistant"
 LABEL io.hass.arch="amd64|aarch64"
 LABEL io.hass.type="addon"
-LABEL io.hass.version="4.4.18"
+LABEL io.hass.version="4.4.16"
 RUN mkdir -p /data/db /var/log/mongodb
 
 RUN apt-get update && \

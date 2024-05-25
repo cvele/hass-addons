@@ -10,7 +10,7 @@ cap_add:
 security_opt:
   - no-new-privileges:true
 name: "MongoDB"
-version: "4.4.18"
+version: "4.4.16"
 slug: "mongodb"
 description: "A MongoDB addon for Home Assistant"
 arch:
