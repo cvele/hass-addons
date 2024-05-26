@@ -1,14 +1,3 @@
-profile: "hassio-supervisor"
-path: "/usr/bin/mongod"
-
-# apparmor: true
-
-cap_add:
-  - NET_ADMIN
-  - SYS_ADMIN
-
-security_opt:
-  - no-new-privileges:true
 name: "MongoDB"
 version: "4.4.16"
 slug: "mongodb"
