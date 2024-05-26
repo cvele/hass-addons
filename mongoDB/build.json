@@ -1,0 +1,10 @@
+{
+    "build_from": {
+        "aarch64": "ghcr.io/home-assistant/aarch64-base-ubuntu:latest",
+        "amd64": "ghcr.io/home-assistant/amd64-base-ubuntu:latest",
+        "armv7": "ghcr.io/home-assistant/armv7-base-ubuntu"
+    },
+    "args": {
+        "BUILD_ARCH": "{arch}"
+    }
+}
