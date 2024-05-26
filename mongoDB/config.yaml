@@ -1,7 +1,7 @@
 profile: "hassio-supervisor"
 path: "/usr/bin/mongod"
 
-apparmor: true
+# apparmor: true
 
 cap_add:
   - NET_ADMIN
