@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
+    
   release:
     name: Build and Push Docker Image
     runs-on: self-hosted
