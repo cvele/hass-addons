@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-    
   release:
     name: Build and Push Docker Image
     runs-on: self-hosted
@@ -48,9 +47,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: mongodb
-          platforms: linux/${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ghcr.io/cvele/hass-mongodb:7.0.8-${{ matrix.platform }},ghcr.io/cvele/hass-mongodb:latest-${{ matrix.platform }}
-          build-args: |
-            BUILD_FROM=${{ matrix.platform == 'amd64' && 'ghcr.io/home-assistant/amd64-base-ubuntu:20.04' || matrix.platform == 'arm64' && 'ghcr.io/home-assistant/aarch64-base-ubuntu:20.04' || matrix.platform == 'armv7' && 'ghcr.io/home-assistant/armv7-base-ubuntu:20.04' }}
-            BUILD_ARCH=${{ matrix.platform }}
+          tags: |
+            ghcr.io/cvele/hass-mongodb:7.0.8
+            ghcr.io/cvele/hass-mongodb:latest

@@ -100,8 +100,3 @@ ENV HOME /data/db
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
-
-EXPOSE 27017
-COPY run.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/run.sh
-CMD ["run.sh"]
