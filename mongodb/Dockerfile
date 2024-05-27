@@ -79,21 +79,39 @@ RUN set -ex; \
 ENV MONGO_VERSION r7.0.8
 ENV PI_VERSION pi4
 
+# Step 1: Download MongoDB binaries
 RUN set -ex; \
     echo "Downloading MongoDB binaries..."; \
-    wget -O "/tmp/unofficial-mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" "https://github.com/themattman/mongodb-raspberrypi-binaries/releases/download/${MONGO_VERSION}-rpi-unofficial/mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" || { echo "Failed to download MongoDB binaries"; exit 1; }; \
+    wget -O "/tmp/unofficial-mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" "https://github.com/themattman/mongodb-raspberrypi-binaries/releases/download/${MONGO_VERSION}-rpi-unofficial/mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" || { echo "Failed to download MongoDB binaries"; exit 1; }
+
+# Step 2: Extract MongoDB binaries
+RUN set -ex; \
     echo "Extracting MongoDB binaries..."; \
-    tar xzvf "/tmp/unofficial-mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" -C /tmp || { echo "Failed to extract MongoDB binaries"; exit 1; }; \
+    tar xzvf "/tmp/unofficial-mongodb.ce.${PI_VERSION}.${MONGO_VERSION}.tar.gz" -C /tmp || { echo "Failed to extract MongoDB binaries"; exit 1; }
+
+# Step 3: Move MongoDB binaries
+RUN set -ex; \
+    echo "Moving MongoDB binaries..."; \
     mv /tmp/mongo /usr/local/bin || { echo "Failed to move mongo binary"; exit 1; }; \
     mv /tmp/mongod /usr/local/bin || { echo "Failed to move mongod binary"; exit 1; }; \
     mv /tmp/mongos /usr/local/bin || { echo "Failed to move mongos binary"; exit 1; }; \
     rm /tmp/README.md || { echo "Failed to remove README.md"; exit 1; }; \
-    rm /tmp/LICENSE-Community.txt || { echo "Failed to remove LICENSE-Community.txt"; exit 1; }; \
+    rm /tmp/LICENSE-Community.txt || { echo "Failed to remove LICENSE-Community.txt"; exit 1; }
+
+# Step 4: Download libstdc++
+RUN set -ex; \
     echo "Downloading libstdc++..."; \
-    wget -O "/tmp/libstdc++.so.6.0.29" "https://github.com/themattman/raspberrypi-binaries/raw/main/libstdc%2B%2B/libstdc%2B%2B.so.6.0.29" || { echo "Failed to download libstdc++"; exit 1; }; \
+    wget -O "/tmp/libstdc++.so.6.0.29" "https://github.com/themattman/raspberrypi-binaries/raw/main/libstdc%2B%2B/libstdc%2B%2B.so.6.0.29" || { echo "Failed to download libstdc++"; exit 1; }
+
+# Step 5: Move and link libstdc++
+RUN set -ex; \
+    echo "Moving and linking libstdc++..."; \
     mv "/tmp/libstdc++.so.6.0.29" "/usr/local/lib/libstdc++.so.6.0.29" || { echo "Failed to move libstdc++"; exit 1; }; \
-    ln -sf "/usr/local/lib/libstdc++.so.6.0.29" "/lib/aarch64-linux-gnu/libstdc++.so.6" || { echo "Failed to create symlink for libstdc++"; exit 1; }; \
-    echo "Script completed successfully."
+    ln -sf "/usr/local/lib/libstdc++.so.6.0.29" "/lib/aarch64-linux-gnu/libstdc++.so.6" || { echo "Failed to create symlink for libstdc++"; exit 1; }
+
+# Final message
+RUN echo "Script completed successfully."
+
 VOLUME /data/db /data/configdb
 
 # ensure that if running as custom user that "mongosh" has a valid "HOME"
