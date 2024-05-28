@@ -13,10 +13,27 @@ jobs:
     
   release:
     name: Build and Push Docker Image
-    runs-on: self-hosted
+    runs-on: self-hosted    
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the 
+      # updated CHANGELOG back to the repository.
+      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
+      contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.tag_name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit and push changelog
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update CHANGELOG.md"
+          file_pattern: CHANGELOG.md
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -47,4 +64,4 @@ jobs:
           context: mongodb
           platforms: linux/arm64
           push: true
-          tags: ghcr.io/cvele/hass-mongodb:7.0.8,ghcr.io/cvele/hass-mongodb:latest
+          tags: ghcr.io/cvele/hass-mongodb:7.0.8-0,ghcr.io/cvele/hass-mongodb:latest

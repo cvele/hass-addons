@@ -7,7 +7,7 @@ This is a Home Assistant addon for running MongoDB. MongoDB is a NoSQL database 
 ## Features
 
 - MongoDB version `7.0.8`
-- Supports multiple architectures: `arm64`, `amd64`, `armv7`
+- Supports only `arm64`
 - Secure authentication with root user and password
 - Exposes MongoDB on port 27017
 
