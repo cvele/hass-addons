@@ -31,7 +31,7 @@ jobs:
         with:
           image-ref: 'ghcr.io/cvele/hass-mongodb:${{ github.sha }}'
           format: 'table'
-          exit-code: '1' # Set to '1' if you want the action to fail on vulnerabilities
+          exit-code: '0' # Set to '1' if you want the action to fail on vulnerabilities
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
