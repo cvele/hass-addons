@@ -35,14 +35,11 @@ jobs:
 
       - name: Create CHANGELOG.md
         run: |
-          echo "## Changelog" > mongodb/CHANGELOG.md
-          echo "" >> mongodb/CHANGELOG.md
           echo "### Version ${{ env.VERSION }}" >> mongodb/CHANGELOG.md
           git log -1 --pretty=format:%B >> mongodb/CHANGELOG.md
 
       - name: Commit CHANGELOG.md
         run: |
-          git add mongodb/CHANGELOG.md
           git commit -m "Update CHANGELOG.md for version ${{ env.VERSION }}"
           git push origin HEAD:${{ github.ref }}
 
