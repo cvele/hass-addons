@@ -47,4 +47,4 @@ jobs:
           context: mongodb
           platforms: linux/arm64
           push: true
-          tags: ghcr.io/cvele/hass-mongodb:7.0.8-${{ matrix.platform }},ghcr.io/cvele/hass-mongodb:latest-${{ matrix.platform }}
+          tags: ghcr.io/cvele/hass-mongodb:7.0.8,ghcr.io/cvele/hass-mongodb:latest
