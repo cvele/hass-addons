@@ -24,7 +24,7 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t ghcr.io/cvele/hass-mongodb:${{ github.sha }} .
+          docker build -t ghcr.io/cvele/hass-mongodb:${{ github.sha }} mongodb/
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.21.0
