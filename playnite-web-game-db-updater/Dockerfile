@@ -1,8 +1,0 @@
-FROM node:20-alpine3.19
-LABEL org.opencontainers.image.source https://github.com/andrew-codes/playnite-web
-RUN apk add --no-cache bash
-WORKDIR /opt/playnite-web-game-db-updater
-COPY .modules/playnite-web/apps/game-db-updater/_packaged/ .
-COPY playnite-web-game-db-updater/run.sh /
-RUN chmod a+x /run.sh
-CMD [ "/run.sh" ]
