@@ -27,5 +27,8 @@
             "type": "rw"
         }
     },
-    "icon": "icon.png"
+    "icon": "icon.png",
+    "privileged": [
+        "SYS_PTRACE"
+    ]
 }

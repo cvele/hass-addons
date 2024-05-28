@@ -35,7 +35,7 @@ jobs:
       - name: Update CHANGELOG.md
         run: |
           echo "### Version ${{ env.VERSION }}" > temp_CHANGELOG.md
-          git log -1 --pretty=format:%B >> mongodb/CHANGELOG.md
+          git log -1 --pretty=format:%B >> temp_CHANGELOG.md
           echo "" >> temp_CHANGELOG.md
           cat mongodb/CHANGELOG.md >> temp_CHANGELOG.md
           mv temp_CHANGELOG.md mongodb/CHANGELOG.md
