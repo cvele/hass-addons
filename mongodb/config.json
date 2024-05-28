@@ -10,7 +10,7 @@
     "boot": "auto",
     "host_pid": "true",
     "options": {
-        "MONGO_INITDB_ROOT_USERNAME": "localhost",
+        "MONGO_INITDB_ROOT_USERNAME": "homeassistant",
         "MONGO_INITDB_ROOT_PASSWORD": null
     },
     "ports": {
