@@ -40,6 +40,7 @@ jobs:
 
       - name: Commit CHANGELOG.md
         run: |
+          git add mongodb/CHANGELOG.md
           git commit -m "Update CHANGELOG.md for version ${{ env.VERSION }}"
           git push origin HEAD:${{ github.ref }}
 
