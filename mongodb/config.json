@@ -1,6 +1,6 @@
 {
     "name": "MongoDB",
-    "version": "7.0.8-0",
+    "version": "7.0.8-1",
     "slug": "mongodb",
     "description": "A MongoDB addon for Home Assistant based on Unofficial Mongo for RBPI",
     "arch": [
@@ -10,22 +10,22 @@
     "boot": "auto",
     "options": {
         "MONGO_INITDB_ROOT_USERNAME": "localhost",
-        "MONGO_INITDB_ROOT_PASSWORD": null,
+        "MONGO_INITDB_ROOT_PASSWORD": null
     },
     "ports": {
-      "27017/tcp": 27017
+        "27017/tcp": 27017
     },
     "schema": {
-        "MONGO_INITDB_ROOT_USERNAME": str,
-        "MONGO_INITDB_ROOT_PASSWORD": password,
+        "MONGO_INITDB_ROOT_USERNAME": "str",
+        "MONGO_INITDB_ROOT_PASSWORD": "password"
     },
     "image": "ghcr.io/cvele/hass-mongodb",
-    "map": [
+    "map": {
         "config": {
-          "source": "/mnt/data/mongo",
-          "target": "/data/db",
-          "type": "rw"
+            "source": "/mnt/data/mongo",
+            "target": "/data/db",
+            "type": "rw"
         }
-    ],
+    },
     "icon": "icon.png"
 }
