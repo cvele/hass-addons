@@ -6,7 +6,7 @@ This is a Home Assistant addon for running MongoDB. This addon allows you to run
 
 ## Features
 
-- [MongoDB](https://github.com/cvele/hass-addons/blob/main/mongodb/Dockerfile) version `7.0.8`
+- [MongoDB](https://github.com/cvele/hass-addons/blob/main/mongodb/Dockerfile) version `7.0.8` based on binaries from: [themattman/mongodb-raspberrypi-binaries](https://github.com/themattman/mongodb-raspberrypi-binaries)
 - Supports only `arm64`
 - Secure authentication with root user and password
 - Exposes MongoDB on port `27017`
