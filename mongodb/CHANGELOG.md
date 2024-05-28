@@ -1,4 +1,7 @@
 ### Version 7.0.8-1
+Merge branch 'main' of github.com:cvele/hass-addons
+
+### Version 7.0.8-1
 Change default username
 
 ### Version 7.0.8-1
