@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/aarch64-base-ubuntu:latest
+FROM ghcr.io/home-assistant/aarch64-base-ubuntu:20.04
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN set -eux; \
