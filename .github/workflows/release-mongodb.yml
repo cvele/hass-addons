@@ -33,10 +33,14 @@ jobs:
           VERSION=$(jq -r '.version' mongodb/config.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Create CHANGELOG.md
+      - name: Update CHANGELOG.md
         run: |
-          echo "### Version ${{ env.VERSION }}" >> mongodb/CHANGELOG.md
+          echo "### Version ${{ env.VERSION }}" > temp_CHANGELOG.md
           git log -1 --pretty=format:%B >> mongodb/CHANGELOG.md
+          echo "" >> temp_CHANGELOG.md
+          cat mongodb/CHANGELOG.md >> temp_CHANGELOG.md
+          mv temp_CHANGELOG.md mongodb/CHANGELOG.md
+          git add mongodb/CHANGELOG.md
 
       - name: Commit CHANGELOG.md
         run: |
