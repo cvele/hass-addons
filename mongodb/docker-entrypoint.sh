@@ -17,16 +17,8 @@ if [ -z "${MONGO_INITDB_ROOT_USERNAME}" ] || [ -z "${MONGO_INITDB_ROOT_PASSWORD}
     exit 1
 fi
 
-# Add additional arguments to the command if provided
-if [[ "${1:0:1}" = '-' ]]; then
-    set -- mongod "$@"
-fi
-
-# Ensure the mongod command runs properly
-if [[ "$1" == "mongod" ]]; then
-    exec "$@" --bind_ip_all --port 27017 --auth
-else
-    exec "$@"
+if [ "${1:0:1}" = '-' ]; then
+	set -- mongod "$@"
 fi
 
 originalArgOne="$1"
