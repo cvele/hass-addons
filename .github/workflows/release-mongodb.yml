@@ -46,13 +46,6 @@ jobs:
           git commit -m "Update CHANGELOG.md for version ${{ env.VERSION }}"
           git push origin HEAD:${{ github.ref }}
 
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          PRERELEASE: false
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
