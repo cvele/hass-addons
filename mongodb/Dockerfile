@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ghcr.io/home-assistant/aarch64-base-ubuntu:latest
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN set -eux; \
