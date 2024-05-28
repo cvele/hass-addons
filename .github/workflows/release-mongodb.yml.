@@ -1,0 +1,110 @@
+# // This is a test file and shoud be used only as a reference 
+# name: Release MongoDB
+
+# on:
+#   workflow_dispatch:
+#   release:
+#     types: [created]
+
+# jobs:
+#   create_release:
+#     name: Create GitHub Release
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       - name: Set up Git
+#         run: |
+#           git config --global user.name "github-actions[bot]"
+#           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+#       - name: Extract version
+#         id: get_version
+#         run: |
+#           VERSION=$(grep 'version:' mongodb/config.yaml | awk '{print $2}')
+#           echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+#       - name: Create Release
+#         id: create_release
+#         uses: actions/create-release@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           tag_name: ${{ env.VERSION }}
+#           release_name: Release ${{ env.VERSION }}
+#           body: |
+#             ## What's Changed
+#             ${{ github.event.head_commit.message }}
+#           draft: false
+#           prerelease: false
+
+#       - name: Update Changelog
+#         uses: stefanzweifel/changelog-updater-action@v1
+#         with:
+#           latest-version: ${{ env.VERSION }}
+#           release-notes: ${{ github.event.head_commit.message }}
+#           path: mongodb/CHANGELOG.md
+
+#       - name: Commit and push changelog
+#         uses: stefanzweifel/git-auto-commit-action@v5
+#         with:
+#           commit_message: "Update mongodb/CHANGELOG.md"
+#           file_pattern: mongodb/CHANGELOG.md
+
+
+
+
+
+
+#   release:
+#     name: Build and Push Docker Image
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: write
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       - name: Set up Git
+#         run: |
+#           git config --global user.name "github-actions[bot]"
+#           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+#       - name: Extract version
+#         id: get_version
+#         run: echo "VERSION=$(grep 'version:' mongodb/config.yaml | awk '{print $2}')" >> $GITHUB_ENV
+
+#       - name: Set up QEMU
+#         uses: docker/setup-qemu-action@v3
+#         with:
+#           platforms: all
+
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v3
+
+#       - name: Cache Docker layers
+#         uses: actions/cache@v3
+#         with:
+#           path: /tmp/.buildx-cache
+#           key: ${{ runner.os }}-buildx-${{ github.sha }}
+#           restore-keys: |
+#             ${{ runner.os }}-buildx-
+
+#       - name: Login to GitHub Container Registry
+#         uses: docker/login-action@v3
+#         with:
+#           registry: ghcr.io
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
+
+#       - name: Build and push
+#         uses: docker/build-push-action@v5
+#         with:
+#           context: mongodb
+#           platforms: linux/arm64
+#           push: true
+#           tags: |
+#             ghcr.io/cvele/hass-mongodb:${{ env.VERSION }}
+#             ghcr.io/cvele/hass-mongodb:latest
