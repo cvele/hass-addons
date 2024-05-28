@@ -8,6 +8,9 @@ RUN set -eux; \
 	chown -R mongodb:mongodb /data/db /data/configdb
 
 RUN set -eux; \
+	apt-get update && apt-get upgrade -y
+
+RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 		ca-certificates \
