@@ -23,10 +23,10 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Extract Version from mongodb/config
+      - name: Extract Version from mongodb/config.json
         id: extract_version
         run: |
-          VERSION=$(cat mongodb/config | grep 'version' | cut -d '"' -f 4)
+          VERSION=$(jq -r '.version' mongodb/config.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Create CHANGELOG.md
