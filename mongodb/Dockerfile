@@ -122,5 +122,5 @@ VOLUME /data/db /data/configdb
 ENV HOME /data/db
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 CMD ["docker-entrypoint.sh"]
