@@ -1,39 +1,80 @@
+// This is a test file and shoud be used only as a reference 
 name: Release MongoDB
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'mongodb/*'
-      - '.github/workflows/release-mongodb.yml'
   workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
-    
-  release:
-    name: Build and Push Docker Image
-    runs-on: self-hosted    
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the 
-      # updated CHANGELOG back to the repository.
-      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
-      contents: write
+  create_release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Extract version
+        id: get_version
+        run: |
+          VERSION=$(grep 'version:' mongodb/config.yaml | awk '{print $2}')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            ## What's Changed
+            ${{ github.event.head_commit.message }}
+          draft: false
+          prerelease: false
+
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
-          latest-version: ${{ github.event.release.tag_name }}
-          release-notes: ${{ github.event.release.body }}
+          latest-version: ${{ env.VERSION }}
+          release-notes: ${{ github.event.head_commit.message }}
+          path: mongodb/CHANGELOG.md
 
       - name: Commit and push changelog
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Update CHANGELOG.md"
-          file_pattern: CHANGELOG.md
+          commit_message: "Update mongodb/CHANGELOG.md"
+          file_pattern: mongodb/CHANGELOG.md
+
+
+
+
+
+
+  release:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Extract version
+        id: get_version
+        run: echo "VERSION=$(grep 'version:' mongodb/config.yaml | awk '{print $2}')" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -64,4 +105,6 @@ jobs:
           context: mongodb
           platforms: linux/arm64
           push: true
-          tags: ghcr.io/cvele/hass-mongodb:7.0.8-0,ghcr.io/cvele/hass-mongodb:latest
+          tags: |
+            ghcr.io/cvele/hass-mongodb:${{ env.VERSION }}
+            ghcr.io/cvele/hass-mongodb:latest

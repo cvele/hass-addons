@@ -2,14 +2,14 @@
 
 ## Description
 
-This is a Home Assistant addon for running MongoDB. MongoDB is a NoSQL database known for its high performance, high availability, and easy scalability. This addon allows you to run a MongoDB instance within your Home Assistant setup.
+This is a Home Assistant addon for running MongoDB. This addon allows you to run a MongoDB instance within your Home Assistant setup on `arm64` Raspberry PI.
 
 ## Features
 
 - MongoDB version `7.0.8`
 - Supports only `arm64`
 - Secure authentication with root user and password
-- Exposes MongoDB on port 27017
+- Exposes MongoDB on port `27017`
 
 ## Installation
 
