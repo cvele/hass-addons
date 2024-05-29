@@ -3,6 +3,12 @@
 # shellcheck disable=SC2155,SC2015
 set -Eeuo pipefail
 
+if [ "${1:0:1}" = '-' ]; then
+	set -- mongod "$@"
+fi
+
+originalArgOne="$1"
+
 # Source bashio
 if ! source /usr/lib/bashio/bashio.sh; then
     echo "Failed to source bashio. Exiting."
@@ -20,12 +26,6 @@ if [ -z "${MONGO_INITDB_ROOT_USERNAME}" ] || [ -z "${MONGO_INITDB_ROOT_PASSWORD}
 fi
 
 echo "MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}"
-
-if [ "${1:0:1}" = '-' ]; then
-	set -- mongod "$@"
-fi
-
-originalArgOne="$1"
 
 # allow the container to be started with `--user`
 # all mongo* commands should be dropped to the correct user
