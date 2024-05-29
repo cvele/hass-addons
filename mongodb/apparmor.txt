@@ -54,7 +54,7 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   /etc/hosts r,
 
   # Allow execution of entrypoint and cmd
-  /usr/local/bin/docker-entrypoint.sh ix,
+  /usr/bin/docker-entrypoint.sh ix,
   /run.sh ix,
 
   # Allow MongoDB executable
