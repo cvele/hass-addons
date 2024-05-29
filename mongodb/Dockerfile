@@ -12,5 +12,8 @@ EXPOSE 27017
 
 COPY run.sh /
 RUN chmod a+x /run.sh
-
 CMD [ "/run.sh" ]
+
+COPY docker-entrypoint.sh /
+RUN chmod a+x docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
