@@ -10,7 +10,7 @@ RUN mkdir -p /tmp/bashio && \
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update || true && \
-	apt-get install -y --no-install-recommends curl=7.68.0 && \
+	apt-get install -y --no-install-recommends curl=7.68.0-1ubuntu2.22 && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
