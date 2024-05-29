@@ -1,0 +1,89 @@
+#include <tunables/global>
+
+profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  capability dac_override,
+  capability setuid,
+  capability setgid,
+  capability net_bind_service,
+  capability sys_chroot,
+  capability sys_admin,
+  
+  # Allow MongoDB executable
+  /usr/bin/mongod ix,
+  
+  # Allow Bashio
+  /usr/lib/bashio/** ix,
+  /usr/bin/bashio ix,
+
+  # S6-Overlay (assuming you're using it as part of the Home Assistant add-on)
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
+  /dev/tty rw,
+
+  # Allow access to addon specific data
+  /data/** rw,
+
+  # Allow access to mapped volumes specified in config.json
+  /mnt/data/mongo/** rw,
+
+  # Allow temporary files
+  /tmp/** rwk,
+
+  # Network access
+  network inet stream,
+  network inet dgram,
+  network inet raw,
+
+  # Logging
+  /var/log/** rw,
+
+  # Required for proper functioning
+  /bin/sh ix,
+  /bin/bash ix,
+  /bin/echo ix,
+  /etc/passwd r,
+  /etc/group r,
+  /etc/hosts r,
+
+  # Start new profile for MongoDB
+  /usr/bin/mongod cx -> mongod_profile,
+  
+  profile mongod_profile flags=(attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+    
+    capability dac_override,
+    capability setuid,
+    capability setgid,
+    capability net_bind_service,
+    capability sys_chroot,
+    capability sys_admin,
+
+    # Allow MongoDB executable
+    /usr/bin/mongod ix,
+
+    # Allow access to addon specific data
+    /data/** rw,
+
+    # Allow access to mapped volumes specified in config.json
+    /mnt/data/mongo/** rw,
+
+    # Network access
+    network inet stream,
+    network inet dgram,
+    network inet raw,
+
+    # Logging
+    /var/log/** rw,
+  }
+}
