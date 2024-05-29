@@ -78,7 +78,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: mongodb
-          platforms: linux/arm64
+          platforms: linux/arm64,linux/amd64
           push: true
           tags: |
             ghcr.io/cvele/hass-mongodb:${{ env.VERSION }}
