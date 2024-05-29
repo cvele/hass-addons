@@ -8,9 +8,11 @@ RUN mkdir -p /tmp/bashio && \
     ln -s /usr/lib/bashio/bashio /usr/bin/bashio && \
     rm -rf /tmp/bashio /tmp/v${BASHIO_VERSION}.tar.gz
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update || true && \
-    apt-get install -y curl && \
-    apt-get clean
+	apt-get install -y --no-install-recommends curl=7.68.0 && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
 
 EXPOSE 27017
 
