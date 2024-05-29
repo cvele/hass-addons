@@ -8,7 +8,7 @@ on:
     paths: 
       - "mongodb/Dockerfile"
       - "mongodb/config.json"
-      - "mongodb/run.sh"
+      - "mongodb/docker-entrypoint.sh"
       - ".github/workflows/release-mongodb.yml"
 
 permissions: 
