@@ -8,6 +8,10 @@ RUN mkdir -p /tmp/bashio && \
     ln -s /usr/lib/bashio/bashio /usr/bin/bashio && \
     rm -rf /tmp/bashio /tmp/v${BASHIO_VERSION}.tar.gz
 
+RUN apt-get update || true && \
+    apt-get install -y curl && \
+    apt-get clean
+
 EXPOSE 27017
 
 COPY docker-entrypoint.sh /usr/local/bin/
