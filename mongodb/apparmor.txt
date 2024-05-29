@@ -10,15 +10,15 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   capability net_bind_service,
   capability sys_chroot,
   capability sys_admin,
-  
+
   # Allow MongoDB executable
   /usr/bin/mongod ix,
-  
+
   # Allow Bashio
   /usr/lib/bashio/** ix,
   /usr/bin/bashio ix,
 
-  # S6-Overlay (assuming you're using it as part of the Home Assistant add-on)
+  # S6-Overlay (if using it as part of the Home Assistant add-on)
   /init ix,
   /bin/** ix,
   /usr/bin/** ix,
@@ -31,7 +31,7 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   /run/{,**} rwk,
   /dev/tty rw,
 
-  # Allow access to addon specific data
+  # Allow access to addon-specific data
   /data/** rw,
 
   # Allow access to mapped volumes specified in config.json
@@ -55,35 +55,33 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   /etc/passwd r,
   /etc/group r,
   /etc/hosts r,
+}
 
-  # Start new profile for MongoDB
-  /usr/bin/mongod cx -> mongod_profile,
-  
-  profile mongod_profile flags=(attach_disconnected,mediate_deleted) {
-    #include <abstractions/base>
-    
-    capability dac_override,
-    capability setuid,
-    capability setgid,
-    capability net_bind_service,
-    capability sys_chroot,
-    capability sys_admin,
+profile mongodb_addon/mongod_profile flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
 
-    # Allow MongoDB executable
-    /usr/bin/mongod ix,
+  # Capabilities
+  capability dac_override,
+  capability setuid,
+  capability setgid,
+  capability net_bind_service,
+  capability sys_chroot,
+  capability sys_admin,
 
-    # Allow access to addon specific data
-    /data/** rw,
+  # Allow MongoDB executable
+  /usr/bin/mongod ix,
 
-    # Allow access to mapped volumes specified in config.json
-    /mnt/data/mongo/** rw,
+  # Allow access to addon-specific data
+  /data/** rw,
 
-    # Network access
-    network inet stream,
-    network inet dgram,
-    network inet raw,
+  # Allow access to mapped volumes specified in config.json
+  /mnt/data/mongo/** rw,
 
-    # Logging
-    /var/log/** rw,
-  }
+  # Network access
+  network inet stream,
+  network inet dgram,
+  network inet raw,
+
+  # Logging
+  /var/log/** rw,
 }
