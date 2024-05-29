@@ -1,6 +1,6 @@
 {
     "name": "MongoDB",
-    "version": "4.4.8-0",
+    "version": "4.4.8-1",
     "slug": "mongodb",
     "description": "A MongoDB addon for Home Assistant based on Unofficial Mongo for RBPI",
     "arch": [
