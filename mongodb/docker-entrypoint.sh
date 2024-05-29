@@ -17,6 +17,8 @@ if [ -z "${MONGO_INITDB_ROOT_USERNAME}" ] || [ -z "${MONGO_INITDB_ROOT_PASSWORD}
     exit 1
 fi
 
+echo "MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}"
+
 if [ "${1:0:1}" = '-' ]; then
 	set -- mongod "$@"
 fi
