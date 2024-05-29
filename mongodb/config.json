@@ -8,7 +8,6 @@
     ],
     "startup": "services",
     "boot": "auto",
-    "apparmor": false,
     "options": {
         "MONGO_INITDB_ROOT_USERNAME": "homeassistant",
         "MONGO_INITDB_ROOT_PASSWORD": null
