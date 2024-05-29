@@ -6,12 +6,10 @@ on:
     branches:
       - main
     paths: 
-      - "mongodb/*"
+      - "mongodb/Dockerfile"
+      - "mongodb/config.json"
+      - "mongodb/run.sh"
       - ".github/workflows/release-mongodb.yml"
-    paths-ignore: 
-      - "mongodb/CHANGELOG.md"
-      - "mongodb/README.md"
-      - "mongodb/icon.png"
 
 permissions: 
   contents: write
