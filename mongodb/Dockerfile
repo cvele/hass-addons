@@ -11,5 +11,5 @@ RUN mkdir -p /tmp/bashio && \
 EXPOSE 27017
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod a+x docker-entrypoint.sh
+RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT [ "/usr/local/bin/docker-entrypoint.sh" ]
