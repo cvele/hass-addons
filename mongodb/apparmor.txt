@@ -11,9 +11,6 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   capability sys_chroot,
   capability sys_admin,
 
-  # Allow MongoDB executable
-  /usr/bin/mongod ix,
-
   # Allow Bashio
   /usr/lib/bashio/** ix,
   /usr/bin/bashio ix,
@@ -55,4 +52,11 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   /etc/passwd r,
   /etc/group r,
   /etc/hosts r,
+
+  # Allow execution of entrypoint and cmd
+  /usr/local/bin/docker-entrypoint.sh ix,
+  /run.sh ix,
+
+  # Allow MongoDB executable
+  /usr/bin/mongod ix,
 }
