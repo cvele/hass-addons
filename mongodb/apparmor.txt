@@ -56,32 +56,3 @@ profile mongodb_addon flags=(attach_disconnected,mediate_deleted) {
   /etc/group r,
   /etc/hosts r,
 }
-
-profile mongodb_addon/mongod_profile flags=(attach_disconnected,mediate_deleted) {
-  #include <abstractions/base>
-
-  # Capabilities
-  capability dac_override,
-  capability setuid,
-  capability setgid,
-  capability net_bind_service,
-  capability sys_chroot,
-  capability sys_admin,
-
-  # Allow MongoDB executable
-  /usr/bin/mongod ix,
-
-  # Allow access to addon-specific data
-  /data/** rw,
-
-  # Allow access to mapped volumes specified in config.json
-  /mnt/data/mongo/** rw,
-
-  # Network access
-  network inet stream,
-  network inet dgram,
-  network inet raw,
-
-  # Logging
-  /var/log/** rw,
-}
