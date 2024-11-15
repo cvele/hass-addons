@@ -3,6 +3,7 @@
     "version": "2.2.3-2",
     "slug": "miniflux",
     "description": "A Miniflux addon for Home Assistant",
+    "init": true,
     "arch": [
         "aarch64"
     ],
@@ -18,12 +19,22 @@
         "8080/tcp": 8080
     },
     "schema": {
-        "ADMIN_USERNAME": "str",
-        "ADMIN_PASSWORD": "password",
-        "RUN_MIGRATIONS": "bool",
-        "DATABASE_URL": "url"
-
+        "ADMIN_USERNAME": {
+            "type": "string"
+        },
+        "ADMIN_PASSWORD": {
+            "type": "password",
+            "nullable": true
+        },
+        "RUN_MIGRATIONS": {
+            "type": "boolean"
+        },
+        "DATABASE_URL": {
+            "type": "string",
+            "format": "uri"
+        }
     },
+    "webui": "http://[HOST]:[PORT:8080]",
     "image": "ghcr.io/cvele/hass-miniflux",
     "icon": "icon.png"
 }
