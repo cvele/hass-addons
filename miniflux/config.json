@@ -24,7 +24,7 @@
         "DATABASE_URL": "postgres://miniflux:secret@db/miniflux?sslmode=disable"
 
     },
-    "image": "docker.io/miniflux/miniflux:2.2.3",
+    "image": "docker.io/miniflux/miniflux",
     "map": {
         "config": {
             "source": "/mnt/data/mongo",
