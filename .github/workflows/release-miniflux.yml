@@ -16,7 +16,7 @@ permissions:
   packages: write
 jobs:
   release:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
