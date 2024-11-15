@@ -1,0 +1,36 @@
+{
+    "name": "Miniflux",
+    "version": "2.2.3",
+    "slug": "miniflux",
+    "description": "A Miniflux addon for Home Assistant",
+    "arch": [
+        "aarch64"
+    ],
+    "startup": "services",
+    "boot": "auto",
+    "options": {
+        "ADMIN_USERNAME": "admin",
+        "ADMIN_PASSWORD": null,
+        "RUN_MIGRATIONS": true,
+        "DATABASE_URL": "postgres://miniflux:secret@db/miniflux?sslmode=disable"
+    },
+    "ports": {
+        "8080/tcp": 8080
+    },
+    "schema": {
+        "ADMIN_USERNAME": "str",
+        "ADMIN_PASSWORD": "password",
+        "RUN_MIGRATIONS": "bool",
+        "DATABASE_URL": "postgres://miniflux:secret@db/miniflux?sslmode=disable"
+
+    },
+    "image": "docker.io/miniflux/miniflux:2.2.3",
+    "map": {
+        "config": {
+            "source": "/mnt/data/mongo",
+            "target": "/data/db",
+            "type": "rw"
+        }
+    },
+    "icon": "icon.png"
+}
