@@ -1,6 +1,6 @@
 {
     "name": "Miniflux",
-    "version": "2.2.3-6",
+    "version": "2.2.3-7",
     "slug": "miniflux",
     "description": "A Miniflux addon for Home Assistant",
     "init": false,
