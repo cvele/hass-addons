@@ -1,6 +1,6 @@
 {
     "name": "Miniflux",
-    "version": "2.2.3-9",
+    "version": "2.2.3-10",
     "slug": "miniflux",
     "description": "A Miniflux addon for Home Assistant",
     "init": false,
@@ -10,6 +10,7 @@
     "startup": "services",
     "boot": "auto",
     "options": {
+        "CREATE_ADMIN": true,
         "ADMIN_USERNAME": "admin",
         "ADMIN_PASSWORD": null,
         "RUN_MIGRATIONS": true,
@@ -22,6 +23,7 @@
         "ADMIN_USERNAME": "str",
         "ADMIN_PASSWORD": "password",
         "RUN_MIGRATIONS": "bool",
+        "CREATE_ADMIN": "bool",
         "DATABASE_URL": "url"
 
     },
