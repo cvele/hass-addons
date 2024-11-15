@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bashio
 # Import Bashio
 echo "Starting Miniflux service..."
 
