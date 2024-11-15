@@ -1,3 +1,6 @@
+### Version 2.2.3-7
+Bump Miniflux version to 2.2.3-7 and update configuration handling
+
 ### Version 2.2.3-6
 Merge branch 'main' of github.com:cvele/hass-addons
 
