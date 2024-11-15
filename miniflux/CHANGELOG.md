@@ -1,3 +1,6 @@
+### Version 2.2.3-10
+Merge branch 'main' of github.com:cvele/hass-addons
+
 ### Version 2.2.3-9
 Merge branch 'main' of github.com:cvele/hass-addons
 
