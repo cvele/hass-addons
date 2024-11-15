@@ -10,6 +10,7 @@ DATABASE_URL=$(bashio::config 'DATABASE_URL')
 RUN_MIGRATIONS=$(bashio::config 'RUN_MIGRATIONS')
 ADMIN_PASSWORD=$(bashio::config 'ADMIN_PASSWORD')
 ADMIN_USERNAME=$(bashio::config 'ADMIN_USERNAME')
+CREATE_ADMIN=$(bashio::config 'CREATE_ADMIN')
 EOF
 
 # Log the generated configuration for debugging
