@@ -15,3 +15,4 @@ RUN chmod +x /etc/services.d/miniflux/run /etc/services.d/miniflux/finish
 EXPOSE 8080
 
 # Use default s6-overlay init
+ENTRYPOINT ["/init"]
