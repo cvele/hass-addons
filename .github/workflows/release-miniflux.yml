@@ -1,0 +1,76 @@
+name: Release Miniflux
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "miniflux/Dockerfile"
+      - "miniflux/config.json"
+      - ".github/workflows/release-miniflux.yml"
+
+permissions:
+  contents: write
+  pull-requests: read
+  packages: write
+jobs:
+  release:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Extract Version from miniflux/config.json
+        id: extract_version
+        run: |
+          VERSION=$(jq -r '.version' miniflux/config.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Update CHANGELOG.md
+        run: |
+          echo "### Version ${{ env.VERSION }}" > temp_CHANGELOG.md
+          git log -1 --pretty=format:%B >> temp_CHANGELOG.md
+          echo "" >> temp_CHANGELOG.md
+          cat miniflux/CHANGELOG.md >> temp_CHANGELOG.md
+          mv temp_CHANGELOG.md miniflux/CHANGELOG.md
+          git add miniflux/CHANGELOG.md
+
+      - name: Commit CHANGELOG.md
+        run: |
+          git add miniflux/CHANGELOG.md
+          git commit -m "Update CHANGELOG.md for version ${{ env.VERSION }}"
+          git push origin HEAD:${{ github.ref }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: miniflux
+          platforms: linux/arm64,linux/amd64
+          push: true
+          tags: |
+            ghcr.io/cvele/hass-miniflux:${{ env.VERSION }}
+            ghcr.io/cvele/hass-miniflux:latest
+          cache-from: type=registry,ref=ghcr.io/cvele/hass-miniflux:buildcache
+          cache-to: type=registry,ref=ghcr.io/cvele/hass-miniflux:buildcache,mode=max

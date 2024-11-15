@@ -24,13 +24,6 @@
         "DATABASE_URL": "url"
 
     },
-    "image": "docker.io/miniflux/miniflux",
-    "map": {
-        "config": {
-            "source": "/mnt/data/mongo",
-            "target": "/data/db",
-            "type": "rw"
-        }
-    },
+    "image": "ghcr.io/cvele/hass-miniflux",
     "icon": "icon.png"
 }
