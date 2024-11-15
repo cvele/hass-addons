@@ -21,7 +21,7 @@
         "ADMIN_USERNAME": "str",
         "ADMIN_PASSWORD": "password",
         "RUN_MIGRATIONS": "bool",
-        "DATABASE_URL": "postgres://miniflux:secret@db/miniflux?sslmode=disable"
+        "DATABASE_URL": "url"
 
     },
     "image": "docker.io/miniflux/miniflux",
